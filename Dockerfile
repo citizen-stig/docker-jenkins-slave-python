@@ -2,7 +2,7 @@ FROM ubuntu:14.04
 MAINTAINER Nikolay Golub <nikolay.v.golub@gmail.com>
 
 # Install a packages and configure SSH server
-RUN apt-get update && apt-get install -y openssh-server openjdk-7-jdk python3 python3-dev python3-pip git sloccount && \
+RUN apt-get update && apt-get install -y openssh-server openjdk-7-jdk python3 python3-dev python3-pip git sloccount cloc && \
     sed -i 's|session    required     pam_loginuid.so|session    optional     pam_loginuid.so|g' /etc/pam.d/sshd && \
     mkdir -p /var/run/sshd && \
     locale-gen en_US.UTF-8 && \
