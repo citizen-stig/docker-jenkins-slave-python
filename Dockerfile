@@ -4,6 +4,11 @@ MAINTAINER Nikolay Golub <nikolay.v.golub@gmail.com>
 # Install a packages and configure SSH server
 RUN apt-get update && apt-get install -y openssh-server openjdk-7-jdk python3 python3-dev python3-pip libjpeg-dev libxml2-dev libxslt1-dev libssl-dev libffi-dev git sloccount cloc && \
     wget https://github.com/AlDanial/cloc/releases/download/v1.66/cloc-1.66.pl -O /usr/local/bin/cloc && chmod +x /usr/local/bin/cloc && \
+    export PHANTOM_JS="phantomjs-2.1.1-linux-x86_64" && \
+    wget https://bitbucket.org/ariya/phantomjs/downloads/$PHANTOM_JS.tar.bz2 && \
+    tar xvjf $PHANTOM_JS.tar.bz2 && \
+    mv $PHANTOM_JS /usr/local/share
+    ln -sf /usr/local/share/$PHANTOM_JS/bin/phantomjs /usr/local/bin && \
     sed -i 's|session    required     pam_loginuid.so|session    optional     pam_loginuid.so|g' /etc/pam.d/sshd && \
     mkdir -p /var/run/sshd && \
     locale-gen en_US.UTF-8 && \
